@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #f8fff4;
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+
+/* Navbar */
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: white !important;
+    font-size: 18px;
+    margin-left: 15px;
+    transition: .3s;
+}
+
+.nav-link:hover {
+    color: yellow !important;
+}
+
+
+/* Home Hero */
+
+.kavi {
+    background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+        url("https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZnJ1aXRzJTIwYW5kJTIwdmVnZXRhYmxlc3xlbnwwfHwwfHx8MA%3D%3D");
+
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+}
+
+.kavi h1 {
+    font-size: 55px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.kavi p {
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 30px;
+}
+
+.kavi .btn {
+    padding: 12px 30px;
+    font-size: 20px;
+    border-radius: 30px;
+}
+
+
+/* Product Cards */
+
+.card {
+    border: none;
+    transition: .4s;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,.2);
+}
+
+.card h5 {
+    font-weight: bold;
+    color: green;
+}
+
+.card p {
+    font-size: 15px;
+}
+
+.card .btn {
+    border-radius: 25px;
+}
+
+
+/* Sections */
+
+section h2 {
+    color: #198754;
+    font-weight: bold;
+}
+
+section h4 {
+    margin-top: 15px;
+    color: #198754;
+}
+
+section p {
+    font-size: 17px;
+}
+
+
+/* Contact */
+
+.contact-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.contact-box h2 {
+    text-align: center;
+}
+
+.contact-box label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.contact-box input,
+.contact-box textarea {
+    width: 100%;
+    text-align: left;
+}
+
+.contact-box input::placeholder,
+.contact-box textarea::placeholder {
+    text-align: left;
+}
+
+.contact-box textarea {
+    resize: vertical;
+    vertical-align: top;
+}
+
+.contact-box .form-control {
+    border-radius: 8px;
+}
+
+.contact-box button {
+    border-radius: 25px;
+    padding: 10px 30px;
+}
+
+
+/* Footer */
+
+footer {
+    margin-top: 50px;
+}
+
+footer h4 {
+    font-weight: bold;
+}
+
+footer p {
+    margin: 5px;
+}
+
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+    .hero {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .navbar-brand {
+        font-size: 22px;
+    }
+
+    .kavi h1 {
+        font-size: 36px;
+    }
+
+    .kavi p {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}

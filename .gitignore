@@ -1,0 +1,45 @@
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies and build files
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Editor files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Exclude backend and practice data
+backend/
+db.json
+
+# Keep only Palmurugan frontend files
+src/*
+!src/main.jsx
+!src/App.jsx
+!src/index.css
+!src/myproject/
+!src/myproject/**
+
+
