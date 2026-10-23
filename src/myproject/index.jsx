@@ -1,15 +1,45 @@
+
 import "./style.css";
 import { Link } from "react-router-dom";
 
 function Home() {
+    const vegetables = [
+        {
+            name: "Fresh Tomatoes",
+            description: "Fresh, juicy tomatoes sourced from trusted farms.",
+            image: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=600",
+            tag: "Farm Fresh"
+        },
+        {
+            name: "Fresh Carrots",
+            description: "Crunchy carrots packed with natural goodness.",
+            image: "https://images.unsplash.com/photo-1445282768818-728615cc910a?w=600",
+            tag: "Healthy Choice"
+        },
+        {
+            name: "Fresh Potatoes",
+            description: "Quality potatoes perfect for everyday cooking.",
+            image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=600",
+            tag: "Best Quality"
+        },
+        {
+            name: "Fresh Brinjal",
+            description: "Carefully selected brinjals for delicious meals.",
+            image: "https://images.unsplash.com/photo-1659261200824-c1c0c4f0c4df?w=600",
+            tag: "Naturally Fresh"
+        }
+    ];
+
     return (
-        <div>
-
-            <nav className="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
-                <div className="container-fluid">
-
-                    <Link className="navbar-brand fw-bold" to="/">
-                        🥬 Palmurugan Fresh Vegetables
+        <div className="home-page">
+            <nav className="navbar navbar-expand-lg home-navbar sticky-top">
+                <div className="container">
+                    <Link className="navbar-brand home-brand" to="/">
+                        <span className="home-brand-icon">🥬</span>
+                        <span>
+                            Palmurugan
+                            <small>FRESH VEGETABLES</small>
+                        </span>
                     </Link>
 
                     <button
@@ -17,312 +47,278 @@ function Home() {
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
                     >
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
                     <div className="collapse navbar-collapse" id="navbarNav">
-
-                        <ul className="navbar-nav ms-auto">
-
+                        <ul className="navbar-nav ms-auto align-items-lg-center">
                             <li className="nav-item">
-                                <Link className="nav-link active" to="/">
+                                <Link className="nav-link home-nav-link active" to="/">
                                     Home
                                 </Link>
                             </li>
-
                             <li className="nav-item">
-                                <Link className="nav-link" to="/about">
+                                <Link className="nav-link home-nav-link" to="/about">
                                     About
                                 </Link>
                             </li>
-
                             <li className="nav-item">
-                                <Link className="nav-link" to="/products">
+                                <Link className="nav-link home-nav-link" to="/products">
                                     Products
                                 </Link>
                             </li>
-
                             <li className="nav-item">
-                                <Link className="nav-link" to="/contact">
+                                <Link className="nav-link home-nav-link" to="/contact">
                                     Contact
                                 </Link>
                             </li>
-                              <li className="nav-item">
-                                                            <Link className="nav-link" to="/cart">Cart 🛒</Link>
-                                                        </li>
-
- <li className="nav-item">
-                                <Link className="nav-link" to="/admin">
-                                    Admin
+                            <li className="nav-item">
+                                <Link className="nav-link home-nav-link" to="/cart">
+                                    Cart 🛒
+                                </Link>
+                            </li>
+                            <li className="nav-item ms-lg-3">
+                                <Link className="home-admin-link" to="/admin">
+                                    Admin Login
                                 </Link>
                             </li>
                         </ul>
-
                     </div>
                 </div>
             </nav>
 
-
-            <section className="kavi">
-
-                <div className="container-fluid">
-
-                    <div className="row align-items-center">
-
+            <section className="home-hero">
+                <div className="container">
+                    <div className="row align-items-center g-5">
                         <div className="col-lg-6">
+                            <span className="home-eyebrow">
+                                🌿 FRESH FROM FARM TO HOME
+                            </span>
 
-                            <h1>
-                                Fresh Vegetables Delivered To Your Doorstep
+                            <h1 className="home-hero-title">
+                                Eat Fresh.
+                                <br />
+                                Live <span>Naturally.</span>
                             </h1>
 
-                            <p>
-                                We provide farm-fresh vegetables directly from
-                                trusted farmers to your home. Quality products,
-                                affordable prices, and fast delivery are our
-                                promises.
+                            <p className="home-hero-text">
+                                Bring home nature's goodness with farm-fresh
+                                vegetables, carefully selected for your family.
+                                Freshness you can see, quality you can trust.
                             </p>
 
-                            <Link
-                                to="/products"
-                                className="btn btn-warning btn-lg"
-                            >
-                                Shop Now
+                            <div className="home-hero-actions">
+                                <Link to="/products" className="home-primary-btn">
+                                    Shop Fresh Vegetables <span>→</span>
+                                </Link>
+                                <Link to="/about" className="home-secondary-btn">
+                                    Discover Our Story
+                                </Link>
+                            </div>
+
+                            <div className="home-trust-row">
+                                <div>
+                                    <strong>100%</strong>
+                                    <span>Freshness Focus</span>
+                                </div>
+                                <div>
+                                    <strong>Farm</strong>
+                                    <span>Sourced Produce</span>
+                                </div>
+                                <div>
+                                    <strong>Daily</strong>
+                                    <span>Fresh Selection</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-6">
+                            <div className="home-hero-image-wrap">
+                                <img
+                                    src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1000"
+                                    className="home-hero-image"
+                                    alt="A colourful selection of fresh vegetables"
+                                />
+                                <div className="home-image-badge">
+                                    <span>🌱</span>
+                                    <div>
+                                        <strong>Freshness First</strong>
+                                        <small>Good food, naturally</small>
+                                    </div>
+                                </div>
+                                <div className="home-image-decoration"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="home-benefits">
+                <div className="container">
+                    <div className="row g-4">
+                        <div className="col-md-4">
+                            <div className="home-benefit">
+                                <span className="home-benefit-icon">🌿</span>
+                                <div>
+                                    <h5>Fresh Selection</h5>
+                                    <p>Vegetables selected with care.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div className="home-benefit">
+                                <span className="home-benefit-icon">🚚</span>
+                                <div>
+                                    <h5>Doorstep Convenience</h5>
+                                    <p>Shop from the comfort of home.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-4">
+                            <div className="home-benefit">
+                                <span className="home-benefit-icon">💚</span>
+                                <div>
+                                    <h5>Quality You Trust</h5>
+                                    <p>Good produce for everyday meals.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="home-products-section">
+                <div className="container">
+                    <div className="home-section-heading">
+                        <span className="home-eyebrow">PICKED WITH CARE</span>
+                        <h2>Fresh Picks for <span>Your Table</span></h2>
+                        <p>Discover everyday favourites for delicious, wholesome meals.</p>
+                    </div>
+
+                    <div className="row g-4">
+                        {vegetables.map((vegetable) => (
+                            <div className="col-sm-6 col-lg-3" key={vegetable.name}>
+                                <article className="home-product-card">
+                                    <div className="home-product-image-wrap">
+                                        <img
+                                            src={vegetable.image}
+                                            className="home-product-image"
+                                            alt={vegetable.name}
+                                            loading="lazy"
+                                        />
+                                        <span className="home-product-tag">
+                                            {vegetable.tag}
+                                        </span>
+                                    </div>
+                                    <div className="home-product-body">
+                                        <span className="home-product-category">
+                                            FRESH VEGETABLES
+                                        </span>
+                                        <h3>{vegetable.name}</h3>
+                                        <p>{vegetable.description}</p>
+                                        <Link
+                                            to="/products"
+                                            className="home-product-link"
+                                        >
+                                            Explore Products <span>→</span>
+                                        </Link>
+                                    </div>
+                                </article>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="text-center home-products-cta">
+                        <Link to="/products" className="home-primary-btn">
+                            Explore All Vegetables <span>→</span>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            <section className="home-story-section">
+                <div className="container">
+                    <div className="row align-items-center g-5">
+                        <div className="col-lg-6">
+                            <div className="home-story-image-wrap">
+                                <img
+                                    src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1000"
+                                    alt="Green farmland and crops"
+                                    className="home-story-image"
+                                    loading="lazy"
+                                />
+                                <div className="home-story-label">
+                                    <span>🌱</span>
+                                    <span>Closer to nature, closer to freshness</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-6">
+                            <span className="home-eyebrow">OUR PROMISE TO YOU</span>
+                            <h2 className="home-story-title">
+                                Good Food Starts With <span>Good Choices.</span>
+                            </h2>
+                            <p className="home-story-text">
+                                At Palmurugan Fresh Vegetables, we believe that
+                                quality ingredients make everyday meals special.
+                                Our goal is to make shopping for fresh vegetables
+                                simple, convenient and enjoyable.
+                            </p>
+                            <Link to="/about" className="home-primary-btn">
+                                Learn About Us <span>→</span>
                             </Link>
-
                         </div>
-
-
-                        <div className="col-lg-6 text-center">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=500"
-                                className="img-fluid rounded shadow"
-                                alt="Fresh Vegetables"
-                            />
-
-                        </div>
-
                     </div>
-
                 </div>
-
             </section>
 
-
-            <section className="py-5 bg-light">
-
-                <div className="container-fluid">
-
-                    <h2 className="text-center mb-5">
-                        Our Fresh Vegetables
-                    </h2>
-
-                    <div className="row">
-
-
-                        <div className="col-md-3 mb-4">
-
-                            <div className="card shadow h-100">
-
-                                <img
-                                    src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=500"
-                                    className="card-img-top"
-                                    alt="Tomato"
-                                />
-
-                                <div className="card-body text-center">
-
-                                    <h5>Tomato</h5>
-
-                                    <p>
-                                        Fresh and juicy tomatoes directly from farms.
-                                    </p>
-
-                                    <button className="btn btn-success">
-                                        Buy Now
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div className="col-md-3 mb-4">
-
-                            <div className="card shadow h-100">
-
-                                <img
-                                    src="https://i.pinimg.com/1200x/ee/80/9e/ee809e20d7b80441260dcd295baf243f.jpg"
-                                    className="card-img-top"
-                                    alt="Carrot"
-                                />
-
-                                <div className="card-body text-center">
-
-                                    <h5>Carrot</h5>
-
-                                    <p>
-                                        Healthy carrots rich in vitamins and nutrients.
-                                    </p>
-
-                                    <button className="btn btn-success">
-                                        Buy Now
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div className="col-md-3 mb-4">
-
-                            <div className="card shadow h-100">
-
-                                <img
-                                    src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500"
-                                    className="card-img-top"
-                                    alt="Potato"
-                                />
-
-                                <div className="card-body text-center">
-
-                                    <h5>Potato</h5>
-
-                                    <p>
-                                        Premium quality potatoes for everyday cooking.
-                                    </p>
-
-                                    <button className="btn btn-success">
-                                        Buy Now
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div className="col-md-3 mb-4">
-
-                            <div className="card shadow h-100">
-
-                                <img
-                                    src="https://i.pinimg.com/1200x/18/8c/17/188c179fcd69e6de1845965968d569bc.jpg"
-                                    className="card-img-top"
-                                    alt="Brinjal"
-                                />
-
-                                <div className="card-body text-center">
-
-                                    <h5>Brinjal</h5>
-
-                                    <p>
-                                        Fresh brinjals carefully selected from farms.
-                                    </p>
-
-                                    <button className="btn btn-success">
-                                        Buy Now
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
+            <section className="home-cta-section">
+                <div className="container text-center">
+                    <span>🥬 A FRESHER WAY TO SHOP</span>
+                    <h2>Bring Home the Goodness of Fresh.</h2>
+                    <p>Your next delicious meal starts with fresh ingredients.</p>
+                    <Link to="/products" className="home-cta-btn">
+                        Start Shopping <span>→</span>
+                    </Link>
                 </div>
-
             </section>
 
-
-            <section className="py-5">
-
-                <div className="container-fluid">
-
-                    <h2 className="text-center mb-5">
-                        Why Choose Us?
-                    </h2>
-
-                    <div className="row text-center">
-
-
-                        <div className="col-md-4">
-
-                            <h1>🥬</h1>
-
-                            <h4>Farm Fresh</h4>
-
-                            <p>
-                                We collect vegetables directly from trusted farmers.
+            <footer className="home-footer">
+                <div className="container">
+                    <div className="row g-4">
+                        <div className="col-lg-5">
+                            <Link className="home-footer-brand" to="/">
+                                🥬 Palmurugan
+                            </Link>
+                            <p className="home-footer-description">
+                                Fresh vegetables for happier kitchens and
+                                healthier everyday meals.
                             </p>
-
                         </div>
-
-
-                        <div className="col-md-4">
-
-                            <h1>🚚</h1>
-
-                            <h4>Fast Delivery</h4>
-
-                            <p>
-                                Quick and safe doorstep delivery across your city.
-                            </p>
-
+                        <div className="col-6 col-lg-3">
+                            <h5>Quick Links</h5>
+                            <Link to="/">Home</Link>
+                            <Link to="/about">About Us</Link>
+                            <Link to="/products">Products</Link>
+                            <Link to="/contact">Contact</Link>
                         </div>
-
-
-                        <div className="col-md-4">
-
-                            <h1>💰</h1>
-
-                            <h4>Affordable Price</h4>
-
-                            <p>
-                                Best quality vegetables at reasonable prices.
-                            </p>
-
+                        <div className="col-6 col-lg-4">
+                            <h5>Get In Touch</h5>
+                            <p>✉ info@palmuruganvegetables.com</p>
+                            <p>☎ +91 98765 43210</p>
+                            <Link to="/cart">View Your Cart 🛒</Link>
                         </div>
-
-
                     </div>
-
+                    <div className="home-footer-bottom">
+                        <p>© 2026 Palmurugan Fresh Vegetables. All rights reserved.</p>
+                        <Link to="/admin">Admin Login</Link>
+                    </div>
                 </div>
-
-            </section>
-
-
-            <footer className="bg-success text-white text-center p-4">
-
-                <h4>Palmurugan Fresh Vegetables</h4>
-
-                <p>
-                    Fresh Vegetables Delivered to Your Doorstep
-                </p>
-
-                <p>
-                    Email : info@palmuruganvegetables.com
-                </p>
-
-                <p>
-                    Phone : +91 98765 43210
-                </p>
-
-                <p>
-                    © 2026 Palmurugan Fresh Vegetables. All Rights Reserved.
-                </p>
-
             </footer>
-
         </div>
     );
 }

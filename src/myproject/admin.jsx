@@ -11,6 +11,7 @@ function Admin() {
 
     async function fetchOrders() {
         setLoading(true);
+        setError("");
 
         try {
             const token = localStorage.getItem("adminToken");
@@ -34,11 +35,10 @@ function Admin() {
 
             const data = await response.json();
 
-            if (response.ok) {
+            if (response.ok && Array.isArray(data)) {
                 setOrders(data);
-                setError("");
             } else {
-                setError("Orders load panna mudiyala");
+                setError(data.message || "Orders load panna mudiyala");
             }
         } catch (err) {
             console.log(err);
@@ -57,103 +57,234 @@ function Admin() {
         fetchOrders();
     }, []);
 
+    const totalRevenue = orders.reduce(
+        (sum, order) => sum + (Number(order.total) || 0),
+        0
+    );
+
     return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-success">
-                <div className="container-fluid">
-                    <Link className="navbar-brand" to="/">
+        <div className="admin-page">
+            <nav className="navbar navbar-expand-lg admin-navbar">
+                <div className="container-fluid px-lg-4">
+                    <Link className="navbar-brand admin-brand" to="/">
                         🥬 Palmurugan Fresh Vegetables
                     </Link>
 
-                    <div className="navbar-nav ms-auto">
-                        <Link className="nav-link" to="/">Home</Link>
-                        <Link className="nav-link" to="/products">Products</Link>
+                    <div className="d-flex align-items-center gap-3">
+                        <Link className="admin-nav-link d-none d-sm-inline" to="/">
+                            Home
+                        </Link>
+
+                        <Link className="admin-nav-link d-none d-sm-inline" to="/products">
+                            Products
+                        </Link>
+
                         <button
-                            className="btn btn-outline-light ms-2"
+                            className="admin-logout-btn"
                             onClick={handleLogout}
                         >
-                            Logout
+                            <span>↪</span> Logout
                         </button>
                     </div>
                 </div>
             </nav>
 
-            <div className="container-fluid py-5">
-                <h2 className="text-center text-success mb-4">
-                    Admin Dashboard
-                </h2>
-
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h5>Total Orders: {orders.length}</h5>
+            <main className="admin-main container-fluid">
+                <div className="admin-heading">
+                    <div>
+                        <span className="admin-eyebrow">MANAGEMENT PANEL</span>
+                        <h1>Admin Dashboard</h1>
+                        <p>Manage customer orders and review order details.</p>
+                    </div>
 
                     <button
-                        className="btn btn-success"
+                        className="admin-refresh-btn"
                         onClick={fetchOrders}
                         disabled={loading}
                     >
-                        {loading ? "Loading..." : "Refresh Orders"}
+                        <span>↻</span> {loading ? "Loading..." : "Refresh Orders"}
                     </button>
                 </div>
 
-                {loading ? (
-                    <p className="text-center">Loading orders...</p>
-                ) : error ? (
-                    <div className="alert alert-danger">{error}</div>
-                ) : orders.length === 0 ? (
-                    <p className="text-center">No orders found</p>
-                ) : (
-                    orders.map((order) => (
-                        <div className="card shadow p-4 mb-4" key={order._id}>
-                            <div className="d-flex justify-content-between flex-wrap">
-                                <h5 className="text-success">
-                                    Customer: {order.name}
-                                </h5>
-                                <span>Order ID: {order._id}</span>
+                <div className="row g-4 admin-stats">
+                    <div className="col-md-6 col-xl-4">
+                        <div className="admin-stat-card">
+                            <div className="admin-stat-icon">📦</div>
+                            <div>
+                                <p>Total Orders</p>
+                                <h2>{orders.length}</h2>
                             </div>
-
-                            <p className="mb-1">Mobile: {order.mobile}</p>
-                            <p className="mb-1">Email: {order.email}</p>
-                            <p className="mb-1">Address: {order.address}</p>
-                            <p>Message: {order.message || "No message"}</p>
-
-                            <h6 className="mt-2">Ordered Products</h6>
-
-                            <div className="table-responsive">
-                                <table className="table table-bordered">
-                                    <thead className="table-success">
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Subtotal</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        {(order.products || []).map((item, index) => (
-                                            <tr key={item._id || index}>
-                                                <td>{item.name}</td>
-                                                <td>₹{item.price}</td>
-                                                <td>{item.quantity}</td>
-                                                <td>₹{item.price * item.quantity}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <h4 className="text-end text-success">
-                                Total: ₹{order.total}
-                            </h4>
                         </div>
-                    ))
-                )}
-            </div>
+                    </div>
 
-            <footer className="bg-success text-white text-center p-4">
-                <h4>Palmurugan Fresh Vegetables</h4>
+                    <div className="col-md-6 col-xl-4">
+                        <div className="admin-stat-card">
+                            <div className="admin-stat-icon">₹</div>
+                            <div>
+                                <p>Total Order Value</p>
+                                <h2>₹{totalRevenue.toLocaleString("en-IN")}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-6 col-xl-4">
+                        <div className="admin-stat-card">
+                            <div className="admin-stat-icon">🌿</div>
+                            <div>
+                                <p>Dashboard Status</p>
+                                <h2 className="admin-status-text">
+                                    {loading ? "Loading" : error ? "Error" : "Active"}
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <section className="admin-orders-section">
+                    <div className="admin-orders-heading">
+                        <div>
+                            <h2>Customer Orders</h2>
+                            <p>View customer information and purchased products.</p>
+                        </div>
+                        <span className="admin-order-count">
+                            {orders.length} Orders
+                        </span>
+                    </div>
+
+                    {loading ? (
+                        <div className="admin-message">
+                            <div className="admin-loader"></div>
+                            <p>Loading orders...</p>
+                        </div>
+                    ) : error ? (
+                        <div className="admin-error">
+                            <strong>Unable to load orders</strong>
+                            <p>{error}</p>
+                            <button onClick={fetchOrders}>Try Again</button>
+                        </div>
+                    ) : orders.length === 0 ? (
+                        <div className="admin-empty">
+                            <div>🛒</div>
+                            <h3>No orders found</h3>
+                            <p>Customer orders will appear here after they place an order.</p>
+                        </div>
+                    ) : (
+                        <div className="admin-order-list">
+                            {orders.map((order) => (
+                                <article className="admin-order-card" key={order._id}>
+                                    <div className="admin-order-card-header">
+                                        <div>
+                                            <span className="admin-order-label">
+                                                ORDER ID
+                                            </span>
+                                            <p className="admin-order-id">
+                                                {order._id}
+                                            </p>
+                                        </div>
+
+                                        <div className="admin-order-total">
+                                            <span>Order Total</span>
+                                            <strong>
+                                                ₹{(Number(order.total) || 0).toLocaleString("en-IN")}
+                                            </strong>
+                                        </div>
+                                    </div>
+
+                                    <div className="admin-customer-details">
+                                        <h3>Customer Information</h3>
+
+                                        <div className="row g-3">
+                                            <div className="col-md-6 col-xl-3">
+                                                <span>Customer Name</span>
+                                                <p>{order.name || "Not provided"}</p>
+                                            </div>
+
+                                            <div className="col-md-6 col-xl-3">
+                                                <span>Mobile Number</span>
+                                                <p>{order.mobile || "Not provided"}</p>
+                                            </div>
+
+                                            <div className="col-md-6 col-xl-3">
+                                                <span>Email Address</span>
+                                                <p>{order.email || "Not provided"}</p>
+                                            </div>
+
+                                            <div className="col-md-6 col-xl-3">
+                                                <span>Delivery Address</span>
+                                                <p>{order.address || "Not provided"}</p>
+                                            </div>
+                                        </div>
+
+                                        {order.message && (
+                                            <div className="admin-customer-message">
+                                                <span>Customer Message</span>
+                                                <p>{order.message}</p>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="admin-products-section">
+                                        <h3>Ordered Products</h3>
+
+                                        {!order.products || order.products.length === 0 ? (
+                                            <p className="admin-no-products">
+                                                No products listed for this order.
+                                            </p>
+                                        ) : (
+                                            <div className="table-responsive">
+                                                <table className="table admin-products-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>Price</th>
+                                                            <th>Quantity</th>
+                                                            <th>Subtotal</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        {order.products.map((item, index) => (
+                                                            <tr key={item._id || index}>
+                                                                <td>{item.name || "Product"}</td>
+                                                                <td>
+                                                                    ₹{Number(item.price) || 0}
+                                                                </td>
+                                                                <td>
+                                                                    <span className="admin-quantity">
+                                                                        {Number(item.quantity) || 0}
+                                                                    </span>
+                                                                </td>
+                                                                <td className="admin-subtotal">
+                                                                    ₹{(
+                                                                        (Number(item.price) || 0) *
+                                                                        (Number(item.quantity) || 0)
+                                                                    ).toLocaleString("en-IN")}
+                                                                </td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    <div className="admin-order-card-footer">
+                                        <span>Thank you for choosing us 🌿</span>
+                                        <strong>
+                                            Total: ₹{(Number(order.total) || 0).toLocaleString("en-IN")}
+                                        </strong>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
+                    )}
+                </section>
+            </main>
+
+            <footer className="admin-footer">
+                <h4>🥬 Palmurugan Fresh Vegetables</h4>
                 <p>Fresh Vegetables Delivered to Your Doorstep</p>
-                <p>© 2026 All Rights Reserved.</p>
+                <span>© 2026 Palmurugan Fresh Vegetables. All Rights Reserved.</span>
             </footer>
         </div>
     );

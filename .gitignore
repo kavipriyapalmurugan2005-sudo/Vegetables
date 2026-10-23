@@ -41,5 +41,6 @@ src/*
 !src/index.css
 !src/myproject/
 !src/myproject/**
-
+!src/myproject2/
+!src/myproject2/**
 
