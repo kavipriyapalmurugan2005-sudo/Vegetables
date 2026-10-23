@@ -30,8 +30,12 @@ dist-ssr/
 .env.*
 !.env.example
 
-# Exclude backend and practice data
-backend/
+# Exclude practice data
+db.json
+
+# Ignore backend dependencies and secrets
+backend/node_modules/
+backend/.env
 db.json
 
 # Keep only Palmurugan frontend files
